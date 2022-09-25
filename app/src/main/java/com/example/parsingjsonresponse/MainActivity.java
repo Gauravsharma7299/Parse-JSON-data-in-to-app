@@ -25,15 +25,15 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     MyAdapter adapter;
-    List<Model>data;
-    private static final  String url="https://random-data-api.com/api/v2/beers?size=5&response_type=json";
+    List<Model>mydata;
+    private static   String url="https://random-data-api.com/api/v2/beers?size=5&response_type=json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView=findViewById(R.id.rc);
-        data=new ArrayList<>();
+        mydata=new ArrayList<>();
         extractData();
 
 
@@ -48,18 +48,23 @@ public class MainActivity extends AppCompatActivity {
                 for (int i=0;i<response.length();i++){
                     try {
                         JSONObject jsonObject=response.getJSONObject(i);
-                        Model data=new Model();
-                        data.setName(jsonObject.getString("name").toString());
-                        data.setBrand(jsonObject.getString("brand").toString());
-                        data.setAlcohol(jsonObject.getString("alcohol").toString());
+                        Model items=new Model();
+                        items.setName(jsonObject.getString("name").toString());
+                        items.setBrand(jsonObject.getString("brand").toString());
+                        items.setAlcohol(jsonObject.getString("alcohol").toString());
+                        mydata.add(items);
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+//                LinearLayoutManager llm=new LinearLayoutManager(getApplicationContext());
+//                llm.setOrientation(LinearLayoutManager.VERTICAL);;
+//                recyclerView.setLayoutManager(llm);
+//                recyclerView.setAdapter(adapter);}
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                adapter=new MyAdapter(getApplicationContext(),data);
+                adapter=new MyAdapter(getApplicationContext(),mydata);
                 recyclerView.setAdapter(adapter);}
         },
                 new Response.ErrorListener() {
