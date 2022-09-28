@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyAdapter adapter;
     List<Model>mydata;
-    private static   String url="https://random-data-api.com/api/v2/beers?size=5&response_type=json";
+    private static   String url="https://random-data-api.com/api/v2/beers?size=10&response_type=json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
